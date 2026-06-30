@@ -1,5 +1,5 @@
 from config import VERSION, DEVELOPER, ENVIRONMENT
-from commands import handle_command
+from assistant import Assistant
 
 
 def main():
@@ -12,14 +12,10 @@ def main():
     print(f"Developer   : {DEVELOPER}")
     print(f"Environment : {ENVIRONMENT}")
     print()
-    print("Atlas is ready.")
-    print()
 
-    while True:
-        command = input("Atlas > ")
+    atlas = Assistant()
 
-        if not handle_command(command):
-            break
+    atlas.start()
 
 
 if __name__ == "__main__":
