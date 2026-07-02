@@ -8,7 +8,7 @@ def handle_command(command):
         print("Hello, YNWKD!")
 
     elif command == "version":
-        print(f"Atlas Core v{VERSION}")
+        print(f"RIO v{VERSION}")
 
     elif command == "help":
         print("Available commands:")
