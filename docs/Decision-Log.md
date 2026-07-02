@@ -31,3 +31,17 @@ Represent the assistant as an object rather than a collection of functions.
 ### Impact
 
 Future capabilities such as Hermes, Athena, memory, and AI integrations can be added without restructuring the application.
+
+## Decision 003
+
+### Title
+
+Adopt a command registry for RIO.
+
+### Reason
+
+A command registry scales better than long if/elif chains and allows new commands to be added with minimal changes.
+
+### Impact
+
+Future integrations such as Telegram commands, Hermes operations, and plugins can register commands without modifying the core dispatcher.

@@ -1,27 +1,45 @@
 from config import VERSION
 
 
+def hello_command():
+    print("Hello, YNWKD!")
+
+
+def version_command():
+    print(f"RIO v{VERSION}")
+
+
+def help_command():
+    print("Available commands:")
+    print("  hello")
+    print("  version")
+    print("  help")
+    print("  exit")
+
+
+def exit_command():
+    print("Goodbye!")
+    return False
+
+
+COMMANDS = {
+    "hello": hello_command,
+    "version": version_command,
+    "help": help_command,
+    "exit": exit_command,
+}
+
+
 def handle_command(command):
     command = command.strip().lower()
 
-    if command == "hello":
-        print("Hello, YNWKD!")
+    if command in COMMANDS:
+        result = COMMANDS[command]()
 
-    elif command == "version":
-        print(f"RIO v{VERSION}")
+        if command == "exit":
+            return False
 
-    elif command == "help":
-        print("Available commands:")
-        print("  hello")
-        print("  version")
-        print("  help")
-        print("  exit")
+        return True
 
-    elif command == "exit":
-        print("Goodbye!")
-        return False
-
-    else:
-        print("Unknown command. Type 'help'.")
-
+    print("Unknown command. Type 'help'.")
     return True

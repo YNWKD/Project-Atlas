@@ -49,3 +49,28 @@ Transform RIO into an object-oriented application.
 ### Status
 
 Mission Completed
+
+
+## Mission 13
+
+### Objective
+
+Replace the conditional command handler with a scalable command registry.
+
+### Completed
+
+- Introduced a command registry using a Python dictionary
+- Converted commands into dedicated functions
+- Simplified command dispatching
+- Updated the version command to reflect the RIO assistant
+
+### Concepts Learned
+
+- Dictionaries
+- Function references
+- Command dispatch
+- Refactoring without changing behavior
+
+### Status
+
+Mission Completed
