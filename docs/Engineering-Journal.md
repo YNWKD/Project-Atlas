@@ -74,3 +74,26 @@ Replace the conditional command handler with a scalable command registry.
 ### Status
 
 Mission Completed
+
+## Mission 14
+
+### Objective
+
+Introduce application logging.
+
+### Completed
+
+- Created logging module
+- Added startup logging
+- Added command logging
+- Added shutdown logging
+
+### Concepts Learned
+
+- Python logging
+- Cross-cutting concerns
+- Log files
+
+### Status
+
+Mission Completed

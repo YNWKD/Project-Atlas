@@ -1,3 +1,8 @@
+APP_NAME = "Project Atlas"
+ASSISTANT_NAME = "RIO"
+
 VERSION = "3.7.12"
+
 DEVELOPER = "YNWKD"
+
 ENVIRONMENT = "Ubuntu WSL"

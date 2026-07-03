@@ -1,0 +1,4 @@
+# Project Atlas Dependencies
+
+# Currently uses only the Python Standard Library.
+# External packages will be added as the project grows.
