@@ -1,8 +1,14 @@
-from config import VERSION
+from config import VERSION, DEVELOPER, ENVIRONMENT
+from ai_service import ask_ai
+from memory_service import remember, recall, load_memory
+
 import os
 import platform
 import sys
 from datetime import datetime
+
+
+AI_MODEL = "qwen2.5:3b"
 
 
 def hello_command():
@@ -13,11 +19,43 @@ def version_command():
     print(f"RIO v{VERSION}")
 
 
+def about_command():
+    memory_count = len(load_memory())
+
+    print("\n==============================")
+    print("RIO ASSISTANT")
+    print("==============================")
+    print(f"Version        : {VERSION}")
+    print(f"Developer      : {DEVELOPER}")
+    print(f"Environment    : {ENVIRONMENT}")
+    print()
+    print("Features")
+    print("------------------------------")
+    print(f"AI Model       : {AI_MODEL}")
+    print("AI             : Enabled")
+    print("Memory         : Enabled")
+    print(f"Memory Entries : {memory_count}")
+    print("Logger         : Enabled")
+    print("History        : Enabled")
+    print()
+    print("Future Services")
+    print("------------------------------")
+    print("Hermes Agent   : Not Installed")
+    print("Telegram Bot   : Not Connected")
+    print("Smart Home     : Not Connected")
+    print("==============================")
+    print()
+
+
 def help_command():
     print("Available commands:")
     print("  hello")
     print("  version")
+    print("  about")
     print("  help")
+    print("  ask")
+    print("  remember")
+    print("  recall")
     print("  exit")
     print("  time")
     print("  date")
@@ -32,16 +70,12 @@ def exit_command():
     return False
 
 
-# 🧠 NEW SYSTEM COMMANDS
-
 def time_command():
-    now = datetime.now().strftime("%H:%M:%S")
-    print(now)
+    print(datetime.now().strftime("%H:%M:%S"))
 
 
 def date_command():
-    now = datetime.now().strftime("%d %B %Y")
-    print(now)
+    print(datetime.now().strftime("%d %B %Y"))
 
 
 def pwd_command():
@@ -62,10 +96,44 @@ def python_command():
     print(sys.version)
 
 
+def ask_command(prompt=""):
+    if not prompt.strip():
+        prompt = input("Ask RIO AI > ").strip()
+
+    if not prompt:
+        print("Please enter a question.")
+        return
+
+    print("\nThinking...\n")
+
+    response = ask_ai(prompt)
+
+    print(response)
+
+
+def remember_command(text=""):
+    if not text.strip():
+        text = input("Remember > ").strip()
+
+    if not text:
+        print("Nothing to remember.")
+        return
+
+    remember(text)
+
+
+def recall_command(keyword=""):
+    recall(keyword)
+
+
 COMMANDS = {
     "hello": hello_command,
     "version": version_command,
+    "about": about_command,
     "help": help_command,
+    "ask": ask_command,
+    "remember": remember_command,
+    "recall": recall_command,
     "exit": exit_command,
     "time": time_command,
     "date": date_command,
@@ -77,12 +145,22 @@ COMMANDS = {
 
 
 def handle_command(command):
-    command = command.strip().lower()
+    parts = command.strip().split(maxsplit=1)
 
-    if command in COMMANDS:
-        result = COMMANDS[command]()
+    if not parts:
+        return True
 
-        if command == "exit":
+    command_name = parts[0].lower()
+    argument = parts[1] if len(parts) > 1 else ""
+
+    if command_name in COMMANDS:
+
+        if command_name in ["ask", "remember", "recall"]:
+            COMMANDS[command_name](argument)
+        else:
+            COMMANDS[command_name]()
+
+        if command_name == "exit":
             return False
 
         return True
